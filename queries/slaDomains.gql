@@ -1,0 +1,7 @@
+query slaDomains {
+    objects: slaDomains {
+        nodes {
+            name
+        }
+    }
+}
