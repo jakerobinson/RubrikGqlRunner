@@ -23,7 +23,7 @@ function Invoke-RubrikQuery {
         $Path,
 
         # Name of built-in query file
-        [Parameter()]
+        [Parameter(Position=1)]
         [string]
         $Name,
 
@@ -35,13 +35,11 @@ function Invoke-RubrikQuery {
     
     process {
         $token = $global:RubrikSecurityCloudConnection.accessToken
-        $rscUrl = $global:RubrikSecurityCloudConnection.PolarisURL
-        $RSCInstance = $rscURL.split('/')[-1]
-        $endpoint = 'https://' + $rscInstance + '/api/graphql'
+        $rscUrl = $global:RubrikSecurityCloudConnection.RubrikURL
         $headers = @{
             'Content-Type'  = 'application/json';
             'Accept'        = 'application/json';
-            'Authorization' = $('Bearer ' + $Token);
+            'Authorization' = $token;
         }
         if ($Name) {
             $queryString = importQueryFile -Name $Name
@@ -52,12 +50,12 @@ function Invoke-RubrikQuery {
 
         $query = @{query = $queryString; variables = $QueryParams} | ConvertTo-Json
 
-        Write-Debug $endpoint
+        Write-Debug $rscUrl
         Write-Debug ($query | ConvertTo-Json)
         write-debug $query
 
         try {
-            $response = Invoke-RestMethod -Method POST -Uri $endpoint -Body $query -Headers $headers
+            $response = Invoke-RestMethod -Method POST -Uri $rscUrl -Body $query -Headers $headers
         }
         catch {
             throw $_
