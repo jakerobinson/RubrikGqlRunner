@@ -78,17 +78,6 @@ $queryvars = @{slaId = "00000000-0000-0000-0000-000000000001"; objectIds = @("51
 Invoke-RubrikQuery -Path /tmp/assignSla.gql -QueryParams $queryvars
 ```
 
-## Running Built-In Queries
-I've included a few built-in queries into the module as examples (against my better judgement). Eventually these will be removed and there will be a separate repo specifically for example queries. For now, you can run these by name. They are `assignSla` and `slaDomains`. Note that I am using the `-Name` parameter instead of `-Path`
-
-```PowerShell
-$queryvars = @{slaId = "00000000-0000-0000-0000-000000000001"; objectIds = @("51c6ebe3-6217-5643-9e30-7820e5653847")
-Invoke-RubrikQuery -Name assignSla -QueryParams $queryvars
-
-Invoke-RubrikQuery -Name slaDomains
-```
-
-
 # Writing you own queries to work with RubrikGQLRunner
 There are only a couple requirements here.
 
