@@ -38,7 +38,7 @@ function Invoke-RubrikQuery {
         catch {
             throw $_.Exception
         }
-        if ($response.data.objects.nodes) {
+        if ($response.data.objects.contains('nodes')) {
             $response.data.objects.nodes
         }
         elseif ($response.data.objects)  {

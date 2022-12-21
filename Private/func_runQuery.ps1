@@ -18,7 +18,7 @@ function runQuery {
         $response = Invoke-RestMethod -Method POST -Uri $rscUrl -Body $query -Headers $headers
     }
     catch {
-        throw $_.Exception
+        throw $_.Exception | Out-String
     }
 
     $response
