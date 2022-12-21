@@ -16,7 +16,7 @@ function Invoke-RubrikQuery {
     [CmdletBinding()]
     param (
         # Path to GraphQL query file
-        [Parameter(required=$true)]
+        [Parameter(Mandatory = $true)]
         [string]
         $Path,
 
@@ -27,24 +27,13 @@ function Invoke-RubrikQuery {
     )
     
     process {
-        $token = $global:RubrikSecurityCloudConnection.accessToken
-        $rscUrl = $global:RubrikSecurityCloudConnection.RubrikURL
-        $headers = @{
-            'Content-Type'  = 'application/json';
-            'Accept'        = 'application/json';
-            'Authorization' = $token;
-        }
         
         $queryString = importQueryFile -Path $Path
 
         $query = @{query = $queryString; variables = $QueryParams} | ConvertTo-Json
 
-        Write-Debug $rscUrl
-        Write-Debug $query
-
         try {
-            $response = Invoke-RestMethod -Method POST -Uri $rscUrl -Body $query -Headers $headers
-            Write-Debug $response
+            $response = runQuery $query
         }
         catch {
             throw $_.Exception
@@ -56,7 +45,7 @@ function Invoke-RubrikQuery {
             $response.data.objects
         }
         else {
-            $response.data
+            $response
         }
     }
 }

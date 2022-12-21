@@ -1,14 +1,11 @@
 function Connect-RubrikSecurityCloud() {
     [CmdletBinding(DefaultParameterSetName = 'ServiceAccountFile')]
     param (
-        [Parameter(Mandatory = $true,
-        ParameterSetName = 'ServiceAccountFile')]
+        [Parameter(ParameterSetName = 'ServiceAccountFile')]
         [String]$ServiceAccountPath,
-        [Parameter(Mandatory = $true,
-        ParameterSetName = 'AccessToken')]
+        [Parameter(ParameterSetName = 'AccessToken')]
         [String]$AccessToken,
-        [Parameter(Mandatory = $true,
-        ParameterSetName = 'AccessToken')]
+        [Parameter(ParameterSetName = 'AccessToken')]
         [String]$InstanceName
     )
     <#
@@ -24,7 +21,7 @@ function Connect-RubrikSecurityCloud() {
 
     The Service Account JSON can be downloaded from the GUI when creating a service account.
 
-    PS> Connect-RubrikSecurityCloud -ServiceAccountFile ~/.rubrik/myserviceaccount.json
+    PS> Connect-RubrikSecurityCloud -Path ~/.rubrik/myserviceaccount.json
 
     .EXAMPLE
 
@@ -81,18 +78,19 @@ function Connect-RubrikSecurityCloud() {
         }
         
     }
-    catch {
-        $errorMessage = $_.Exception | Out-String        
+    catch {      
         throw $_.Exception
-        
     }
-
-
     
     Write-Verbose -Message "Creating the Rubrik Polaris Connection Global variable."
     $global:RubrikSecurityCloudConnection = @{
-        accessToken      = $AccessToken
+        accessToken      = ($AccessToken | ConvertTo-SecureString -AsPlainText)
         RubrikURL        = $RubrikURL
     }
+    Write-Verbose -Message "Testing Connection..."
 
+    $testQuery = runQuery (@{query = '{objects: __schema {queryType {name}}}'} | ConvertTo-Json)
+    if ($testquery.data.objects.queryType.name -eq 'Query') {
+        Write-Output "Connected!"
+    }
 }
