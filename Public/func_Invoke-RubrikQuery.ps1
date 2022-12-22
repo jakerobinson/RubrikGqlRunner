@@ -38,14 +38,28 @@ function Invoke-RubrikQuery {
         catch {
             throw $_.Exception
         }
-        if ($response.data.objects.contains('nodes')) {
-            $response.data.objects.nodes
+
+        # Some queries come back in nodes, and some don't.
+        # Some queries come back as an array, and sometimes not.
+        # PowerShell won't let me just check for $null or emptyString on an array in a hash
+        if ($response.data.objects -is "System.Array") {
+            if ($response.data.objects.contains("nodes")) {
+                $response.data.objects.nodes
+            }
+            else {
+                $response.data.objects
+            }
         }
-        elseif ($response.data.objects)  {
-            $response.data.objects
+        elseif ($response.data.objects -is "System.Management.Automation.PSCustomObject")  {
+            if (!$null -eq $response.data.objects.nodes) {
+                $response.data.objects.nodes
+            }
+            else {
+                $response.data.objects
+            }
         }
         else {
-            $response
+            $response.data.objects
         }
     }
 }
