@@ -8,11 +8,11 @@ Download and unzip into your PowerShell module path (check $env:PsModulePath if 
 You can connect using your web session's access token or using a service account json file downloaded from the GUI when you create the service account.
 
 ## Connecting with Access Token
-You must provide your access token (found in your browsers developer tools network tab), and your RSC instance name. i.e. an instance name of jake refers to `jake.my.rubrik.com`
+You must provide your access token (found in your browsers developer tools network tab) Your Rubrik instance is read from the Access Token automatically.
 ```PowerShell
 #For additional security, you can also read the access token is as a secure string, but here we are just masking the input.
 $AccessToken = Read-Host -Prompt "Access Token" -MaskInput
-Connect-RubrikSecurityCloud -InstanceName jake -AccessToken $AccessToken
+Connect-RubrikSecurityCloud -AccessToken $AccessToken
 ```
 
 ## Connecting with a Service Account JSON file
