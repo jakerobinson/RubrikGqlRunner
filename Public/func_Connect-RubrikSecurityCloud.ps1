@@ -82,7 +82,7 @@ function Connect-RubrikSecurityCloud() {
     
     Write-Verbose -Message "Creating the Rubrik Polaris Connection Global variable."
     $global:RubrikSecurityCloudConnection = @{
-        accessToken      = ($AccessToken | ConvertTo-SecureString -AsPlainText)
+        accessToken      = $AccessToken
         RubrikURL        = $RubrikURL
     }
     Write-Verbose -Message "Testing Connection..."

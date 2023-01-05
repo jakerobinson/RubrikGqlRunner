@@ -3,7 +3,7 @@ function runQuery {
         [String]$query
     )
     
-    $token = $global:RubrikSecurityCloudConnection.accessToken | ConvertFrom-SecureString -AsPlainText
+    $token = $global:RubrikSecurityCloudConnection.accessToken
     $rscUrl = $global:RubrikSecurityCloudConnection.RubrikURL
     $headers = @{
         'Content-Type'  = 'application/json';
