@@ -1,0 +1,26 @@
+mutation CreateMssqlLiveMount($mountedDatabaseName: String!, $targetInstanceId: String, $date: DateTime, $id: String!) {
+  objects: createMssqlLiveMount(input: {
+    config: {
+      mountedDatabaseName: $mountedDatabaseName, 
+      targetInstanceId: $targetInstanceId, 
+      recoveryPoint:{
+        date:$date
+      }
+    }, 
+    id: $id}) 
+  {
+    status
+    startTime
+    progress
+    nodeId
+    links {
+      href
+      rel
+    }
+    endTime
+    error {
+      message
+    }
+    id
+  }
+}
