@@ -30,7 +30,7 @@ function Invoke-RubrikQuery {
         
         [String]$queryString = importQueryFile -Path $Path
 
-        $query = @{query = $queryString; variables = $QueryParams} | ConvertTo-Json
+        $query = @{query = $queryString; variables = $QueryParams} | ConvertTo-Json -Depth 100
 
         try {
             $response = runQuery $query
