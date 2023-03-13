@@ -12,7 +12,7 @@
 RootModule = 'rubrikGqlRunner.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.2'
+ModuleVersion = '1.0.3'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Desktop', 'Core'
@@ -30,7 +30,7 @@ CompanyName = 'Rubrik, Inc.'
 Copyright = '(c) Jake Robinson. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'Jake''s Basic GQL Runner'
+Description = 'Jake''s Basic GQL Runner. THIS IS NOT AN OFFICIAL RUBRIK TOOL.'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = ''
