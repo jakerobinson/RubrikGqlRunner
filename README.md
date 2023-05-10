@@ -2,7 +2,7 @@
 PowerShell module for running GraphQL queries from file
 
 # Installation
-Download and unzip into your PowerShell module path (check $env:PsModulePath if you aren't sure).
+[Download](https://github.com/jakerobinson/RubrikGqlRunner/releases/download/1.0.2/RubrikGqlRunner.zip) and unzip into your PowerShell module path (check $env:PsModulePath if you aren't sure).
 
 # Connecting to RSC
 You can connect using your web session's access token or using a service account json file downloaded from the GUI when you create the service account.
