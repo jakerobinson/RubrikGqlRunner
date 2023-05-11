@@ -58,6 +58,9 @@ function Invoke-RubrikQuery {
                 $response.data.objects
             }
         }
+        elseif ($response.errors) {
+            Write-Host $response.errors
+        }
         else {
             $response.data.objects
         }
