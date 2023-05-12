@@ -69,7 +69,7 @@ Description = 'Jake''s Basic GQL Runner. THIS IS NOT AN OFFICIAL RUBRIK TOOL.'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Connect-RubrikSecurityCloud', 'Invoke-RubrikQuery'
+FunctionsToExport = 'Connect-RubrikSecurityCloud', 'Invoke-RubrikQuery', 'Disconnect-RubrikSecurityCloud'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
