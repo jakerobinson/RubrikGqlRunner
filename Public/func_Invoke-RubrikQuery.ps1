@@ -59,7 +59,7 @@ function Invoke-RubrikQuery {
             }
         }
         elseif ($response.errors) {
-            Write-Host $response.errors
+            Write-Output $response.errors.message
         }
         else {
             $response.data.objects

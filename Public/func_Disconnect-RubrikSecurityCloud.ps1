@@ -1,4 +1,4 @@
-function Connect-RubrikSecurityCloud() {
+function Disconnect-RubrikSecurityCloud() {
     [CmdletBinding(DefaultParameterSetName = 'ServiceAccountFile')]
     param ()
     <#
@@ -17,7 +17,7 @@ function Connect-RubrikSecurityCloud() {
     #>
 
     if (Test-Path variable:global:RubrikSecurityCloudConnection) {
-        $sessionUrl = $global:RubrikSecurityCloudConnection.Replace('graphql','session')
+        $sessionUrl = $global:RubrikSecurityCloudConnection.RubrikUrl.Replace('graphql','session')
         $token = $global:RubrikSecurityCloudConnection.accessToken
         $headers = @{
             'Content-Type'  = 'application/json';
@@ -25,7 +25,7 @@ function Connect-RubrikSecurityCloud() {
             'Authorization' = $token;
         }
         try {
-            $response = Invoke-RestMethod -Method POST -Uri $sessionUrl -Headers $headers
+            $response = Invoke-RestMethod -Method Delete -Uri $sessionUrl -Headers $headers
             Write-Information "Connection to $($global:RubrikSecurityCloudConnection.RubrikURL) released."
         }
         catch {
